@@ -19,11 +19,6 @@ namespace BettingGame.Processors
 
         public void Process(User player, decimal amount)
         {
-            if (amount <= 0)
-            {
-                throw new InvalidOperationException("Invalid deposit amount. Please enter a positive value.");
-            }
-
             player.Wallet.AddAmount(amount);
             _consoleOutputWriter.DepositSuccessMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
         }

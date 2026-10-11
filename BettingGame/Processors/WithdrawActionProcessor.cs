@@ -22,10 +22,12 @@ namespace BettingGame.Processors
             if (player.Wallet.Balance < amount)
             {
                 _consoleOutputWriter.InsufficientFundsForWithdrawalMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
-                return;
             }
-            player.Wallet.SubtractAmount(amount);
-            _consoleOutputWriter.WithdrawSuccessMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
+            else
+            {
+                player.Wallet.SubtractAmount(amount);
+                _consoleOutputWriter.WithdrawSuccessMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
+            }
         }
     }
 }
