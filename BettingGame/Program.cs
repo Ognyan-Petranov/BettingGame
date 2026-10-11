@@ -16,8 +16,9 @@ try
 {
     gameEngine.Run();
 }
-catch (Exception)
+catch (Exception ex)
 {
+    Console.WriteLine($"An error occurred: {ex.Message}");
 }
 
 void RegisterServices(IServiceCollection services)

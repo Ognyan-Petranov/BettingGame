@@ -1,6 +1,5 @@
 ﻿using BettingGame.Constants;
 using BettingGame.Domain.Entities.User;
-using BettingGame.Exceptions;
 using BettingGame.Factories.ActionProcessorFactory;
 using BettingGame.Requests;
 using BettingGame.Services.InputReaders;
@@ -40,15 +39,16 @@ namespace BettingGame
             {
                 ActionRequest request = _consoleInputReader.ReadInput();
 
+                if (request.Operation == ActionOperations.Exit)
+                {
+                    _consoleOutputWriter.PublishGoodbyeMessage();
+                    break;
+                }
+
                 try
                 {
                     var processor = _actionProcessorFactory.GetActionProcessor(request.Operation);
                     processor.Process(player, request.Amount);
-                }
-                catch (GameOverException ex)
-                {
-                    _consoleOutputWriter.CustomMessage(ex.Message);
-                    throw;
                 }
                 catch (Exception ex)
                 {

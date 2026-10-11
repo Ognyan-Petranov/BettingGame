@@ -30,6 +30,11 @@ namespace BettingGame.Services.OutputWriter
             Console.WriteLine($"Insufficient funds for withdrawal of {currency}{amount}. Your current balance is: {currency}{balance}");
         }
 
+        public void PublishGoodbyeMessage()
+        {
+            Console.WriteLine("Thank you for playing! Hope to see you again soon.");
+        }
+
         public void WithdrawSuccessMessage(string currency, decimal amount, decimal balance)
         {
             Console.WriteLine($"Your withdrawal of {currency}{amount} was successful. Your current balance is: {currency}{balance}");
