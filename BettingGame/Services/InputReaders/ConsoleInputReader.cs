@@ -1,27 +1,33 @@
 ﻿
 using BettingGame.Constants;
 using BettingGame.Requests;
+using BettingGame.Services.OutputWriter;
 using BettingGame.Validators;
 
 namespace BettingGame.Services.InputReaders
 {
     public class ConsoleInputReader : IConsoleInputReader
     {
+        private readonly IConsoleOutputWriter _consoleOutputWriter;
+
+        public ConsoleInputReader(IConsoleOutputWriter consoleOutputWriter)
+        {
+            _consoleOutputWriter = consoleOutputWriter;
+        }
+
         public ActionRequest ReadInput()
         {
-            Console.WriteLine("Please, submit action (or type 'exit' to quit):");
+            _consoleOutputWriter.SubmitActionMessage();
             var input = Console.ReadLine();
+
+            if (!string.IsNullOrEmpty(input) && string.Equals(input, ActionOperations.Exit, StringComparison.InvariantCultureIgnoreCase))
+                return new ActionRequest() { Operation = ActionOperations.Exit, Amount = decimal.Zero };
 
             var splitInput = input?.Split(' ', StringSplitOptions.RemoveEmptyEntries);
 
-            if (splitInput?.Length == 1 && splitInput[0].ToLowerInvariant() == ActionOperations.Exit)
-            {
-                return new ActionRequest() { Operation = ActionOperations.Exit, Amount = decimal.Zero };
-            }
-
             if (splitInput?.Length != 2)
             {
-                Console.WriteLine("Invalid input format. Please enter operation followed by transaction amount.");
+                _consoleOutputWriter.InvalidInputFormatMessage();
                 return ReadInput();
             }
 
@@ -30,7 +36,7 @@ namespace BettingGame.Services.InputReaders
 
             if (!decimal.TryParse(amountString, out var amount))
             {
-                Console.WriteLine("Please enter a valid transaction amount.");
+                _consoleOutputWriter.InvalidTransactionAmountMessage();
                 return ReadInput();
             }
             var request = new ActionRequest()
