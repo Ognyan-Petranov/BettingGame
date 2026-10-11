@@ -4,7 +4,10 @@ using BettingGame.Processors;
 using BettingGame.Services.BetRewardCalculator;
 using BettingGame.Services.InputReaders;
 using BettingGame.Services.OutputWriter;
+using BettingGame.Validators;
 using Microsoft.Extensions.DependencyInjection;
+using FluentValidation;
+using BettingGame.Services.Helpers;
 
 var services = new ServiceCollection();
 RegisterServices(services);
@@ -28,6 +31,7 @@ void RegisterServices(IServiceCollection services)
 
     services.AddTransient<IActionProcessorFactory, ActionProcessorFactory>();
     services.AddTransient<IBetRewardCalculator, BetRewardCalculator>();
+    services.AddTransient<IActionRequestParser, ActionRequestParser>();
 
     services.AddScoped<IActionProcessor, DepositActionProcessor>();
     services.AddScoped<IActionProcessor, WithdrawActionProcessor>();
@@ -35,6 +39,7 @@ void RegisterServices(IServiceCollection services)
     services.AddScoped<IActionProcessor, ExitGameProcessor>();
 
     services.AddSingleton<Random>();
+    services.AddValidatorsFromAssemblyContaining<ActionRequestValidator>();
 }
 
 GameEngine BuildGameEngine()

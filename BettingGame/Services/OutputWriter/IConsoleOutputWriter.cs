@@ -11,7 +11,5 @@ namespace BettingGame.Services.OutputWriter
         void WithdrawSuccessMessage(string currency, decimal amount, decimal balance);
         void CustomMessage(string message);
         void SubmitActionMessage();
-        void InvalidInputFormatMessage();
-        void InvalidTransactionAmountMessage();
     }
 }

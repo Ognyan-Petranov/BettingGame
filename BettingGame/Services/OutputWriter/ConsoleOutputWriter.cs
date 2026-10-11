@@ -28,11 +28,6 @@ namespace BettingGame.Services.OutputWriter
             Console.WriteLine($"Insufficient funds for withdrawal of {currency}{amount}. Your current balance is: {currency}{balance}");
         }
 
-        public void InvalidInputFormatMessage()
-        {
-            Console.WriteLine("Invalid input format. Please enter operation followed by transaction amount.");
-        }
-
         public void InvalidTransactionAmountMessage()
         {
             Console.WriteLine("Please enter a valid transaction amount.");
