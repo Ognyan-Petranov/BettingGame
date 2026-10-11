@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BettingGame.Domain/BettingGame.Domain.csproj" />
+  <Project Path="BettingGame/BettingGame.csproj" />
+</Solution>
