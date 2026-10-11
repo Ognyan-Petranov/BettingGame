@@ -23,8 +23,7 @@ namespace BettingGame.Validators
             RuleFor(x => x.Amount)
             .InclusiveBetween(BetAmounts.MinimumBetAmount, BetAmounts.MaximumBetAmount)
             .When(x => x.Operation == ActionOperations.Bet)
-            .WithMessage(
-                $"Please enter a valid bet amount between {BetAmounts.MinimumBetAmount} and {BetAmounts.MaximumBetAmount}.");
+            .WithMessage($"Please enter a valid bet amount between {BetAmounts.MinimumBetAmount} and {BetAmounts.MaximumBetAmount}.");
         }
     }
 }
