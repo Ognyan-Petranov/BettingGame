@@ -16,9 +16,8 @@ try
 {
     gameEngine.Run();
 }
-catch (Exception ex)
+catch (Exception)
 {
-    Console.WriteLine($"An error occurred: {ex.Message}");
 }
 
 void RegisterServices(IServiceCollection services)
@@ -32,6 +31,7 @@ void RegisterServices(IServiceCollection services)
     services.AddScoped<IActionProcessor, DepositActionProcessor>();
     services.AddScoped<IActionProcessor, WithdrawActionProcessor>();
     services.AddScoped<IActionProcessor, BetActionProcessor>();
+    services.AddScoped<IActionProcessor, ExitGameProcessor>();
 
     services.AddSingleton<Random>();
 }
