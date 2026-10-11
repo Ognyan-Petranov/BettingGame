@@ -1,6 +1,7 @@
 ﻿using BettingGame;
 using BettingGame.Factories.ActionProcessorFactory;
 using BettingGame.Processors;
+using BettingGame.Services.BetRewardCalculator;
 using BettingGame.Services.InputReaders;
 using BettingGame.Services.OutputWriter;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,8 @@ void RegisterServices(IServiceCollection services)
     services.AddTransient<IConsoleOutputWriter, ConsoleOutputWriter>();
 
     services.AddTransient<IActionProcessorFactory, ActionProcessorFactory>();
+    services.AddTransient<IBetRewardCalculator, BetRewardCalculator>();
+
     services.AddScoped<IActionProcessor, DepositActionProcessor>();
     services.AddScoped<IActionProcessor, WithdrawActionProcessor>();
     services.AddScoped<IActionProcessor, BetActionProcessor>();
