@@ -25,8 +25,8 @@ namespace BettingGame.Services.InputReaders
                 return ReadInput();
             }
 
-            var operation = splitInput?[0].ToLowerInvariant();
-            var amountString = splitInput?[1];
+            string operation = splitInput?[0].ToLowerInvariant() ?? string.Empty;
+            string amountString = splitInput?[1] ?? string.Empty;
 
             if (!decimal.TryParse(amountString, out var amount))
             {
