@@ -7,6 +7,8 @@ namespace BettingGame.Tests.Services
 {
     public class BetRewardCalculatorTests
     {
+        private const double EXPECTED_RANDOM_OUTPUT = 0.5;
+
         [Fact]
         public void CalculateReward_WhenOutcomeIsAtNoRewardThreshold_ReturnsZero()
         {
@@ -20,9 +22,8 @@ namespace BettingGame.Tests.Services
         [Fact]
         public void CalculateReward_WhenOutcomeIsAtSmallRewardThreshold_ReturnsBasePrize()
         {
-            double expectedRandomOutput = 0.5;
-            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.SmallRewardUpperThreshold, expectedRandomOutput));
-            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + (decimal)expectedRandomOutput * RewardMultipliers.BaseRewardMultiplier;
+            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.SmallRewardUpperThreshold, EXPECTED_RANDOM_OUTPUT));
+            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + (decimal)EXPECTED_RANDOM_OUTPUT * RewardMultipliers.BaseRewardMultiplier;
             decimal expectedAmount = Math.Round(BetAmounts.MaximumBetAmount * expectedMultiplier, 2);
 
             var result = betRewardCalculator.CalculateReward(BetAmounts.MaximumBetAmount);
@@ -33,9 +34,8 @@ namespace BettingGame.Tests.Services
         [Fact]
         public void CalculateReward_WhenOutcomeIsAtMaximumRewardThreshold_ReturnsMaximumPrize()
         {
-            double expectedRandomOutput = 0.5;
-            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.BigRewardThreshold, expectedRandomOutput));
-            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + RewardMultipliers.BaseRewardMultiplier + (decimal)expectedRandomOutput * RewardMultipliers.BigRewardMultiplier;
+            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.BigRewardThreshold, EXPECTED_RANDOM_OUTPUT));
+            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + RewardMultipliers.BaseRewardMultiplier + (decimal)EXPECTED_RANDOM_OUTPUT * RewardMultipliers.BigRewardMultiplier;
             decimal expectedAmount = Math.Round(BetAmounts.MaximumBetAmount * expectedMultiplier, 2);
 
             var result = betRewardCalculator.CalculateReward(BetAmounts.MaximumBetAmount);
@@ -46,9 +46,8 @@ namespace BettingGame.Tests.Services
         [Fact]
         public void CalculateReward_WhenNoRewardThresholdIsPassed_ReturnsSmallReward()
         {
-            double expectedRandomOutput = 0.5;
-            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.NoRewardUpperThreshold + 1, expectedRandomOutput));
-            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + (decimal)expectedRandomOutput * RewardMultipliers.BaseRewardMultiplier;
+            var betRewardCalculator = new BetRewardCalculator(new TestRandom(RewardThresholds.NoRewardUpperThreshold + 1, EXPECTED_RANDOM_OUTPUT));
+            decimal expectedMultiplier = RewardMultipliers.MinimumRewardMultiplier + (decimal)EXPECTED_RANDOM_OUTPUT * RewardMultipliers.BaseRewardMultiplier;
             decimal expectedAmount = Math.Round(BetAmounts.MaximumBetAmount * expectedMultiplier, 2);
 
             var result = betRewardCalculator.CalculateReward(BetAmounts.MaximumBetAmount);
