@@ -21,7 +21,7 @@ namespace BettingGame.Processors
         {
             if (player.Wallet.Balance < amount)
             {
-                _consoleOutputWriter.InsufficientFundsForWithdrawalMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
+                throw new InvalidOperationException($"Insufficient funds for withdrawal of {player.Wallet.Currency}{amount}. Your current balance is: {player.Wallet.Currency}{player.Wallet.Balance}");
             }
             else
             {

@@ -11,8 +11,7 @@ namespace BettingGame.Validators
             RuleFor(x => x.Operation)
                 .NotEmpty()
                 .WithMessage("Operation is required.")
-                .Must(operation => ActionOperations.AllowedOperations
-                .Contains(operation))
+                .Must(operation => ActionOperations.AllowedOperations.Contains(operation))
                 .WithMessage("Invalid operation. Please enter 'deposit', 'withdraw', 'bet', or 'exit'."); ;
 
             RuleFor(x => x.Amount)
