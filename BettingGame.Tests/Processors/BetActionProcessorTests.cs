@@ -63,6 +63,7 @@ namespace BettingGame.Tests.Processors
             betActionProcessor.Process(userToTest, BetAmounts.MaximumBetAmount);
             // Assert
             _mockConsoleOutputWriter.Verify(x => x.BetLostMessage(userToTest.Wallet.Currency, userToTest.Wallet.Balance), Times.Once);
+            Assert.Equal(decimal.Zero, userToTest.Wallet.Balance);
         }
     }
 }
