@@ -25,11 +25,11 @@ namespace BettingGame.Services.BetRewardCalculator
 
         private static BetPrizeEnums ResolvePrizeSize(int outcome)
         {
-            if (outcome > RewardThresholds.NoRewardThreshold && outcome <= RewardThresholds.FixedRewardThreshold)
+            if (outcome > RewardThresholds.NoRewardUpperThreshold && outcome <= RewardThresholds.SmallRewardUpperThreshold)
             {
                 return BetPrizeEnums.BasePrize;
             }
-            else if (outcome > RewardThresholds.FixedRewardThreshold)
+            else if (outcome > RewardThresholds.SmallRewardUpperThreshold)
             {
                 return BetPrizeEnums.BigPrize;
             }
