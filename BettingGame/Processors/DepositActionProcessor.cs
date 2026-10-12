@@ -19,6 +19,9 @@ namespace BettingGame.Processors
 
         public void Process(User player, decimal amount)
         {
+            if (amount <= 0)
+                throw new InvalidOperationException("Deposit amount must be greater than zero.");
+
             player.Wallet.AddAmount(amount);
             _consoleOutputWriter.DepositSuccessMessage(player.Wallet.Currency, amount, player.Wallet.Balance);
         }
