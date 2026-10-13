@@ -30,7 +30,7 @@ namespace BettingGame.Tests.Processors
             var betActionProcessor = CreateServiceToTest();
             Mock.Get(_mockBetRewardCalculator.Object).Setup(x => x.CalculateReward(It.IsAny<decimal>())).Returns<decimal>(x => x * RewardMultipliers.BaseRewardMultiplier);
             decimal initialBalance = _userToTest.Wallet.Balance;
-            decimal amountWon = initialBalance * RewardMultipliers.BaseRewardMultiplier;
+            decimal amountWon = Math.Round(initialBalance * RewardMultipliers.BaseRewardMultiplier, 2);
             // Act
             betActionProcessor.Process(_userToTest, BetAmounts.MaximumBetAmount);
 
