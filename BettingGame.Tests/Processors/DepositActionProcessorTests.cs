@@ -1,5 +1,4 @@
-﻿
-using BettingGame.Domain.Entities.User;
+﻿using BettingGame.Domain.Entities.User;
 using BettingGame.Processors;
 using BettingGame.Services.OutputWriter;
 using Moq;
@@ -32,11 +31,13 @@ namespace BettingGame.Tests.Processors
             _mockConsoleOutputWriter.Verify(x => x.DepositSuccessMessage(_userToTest.Wallet.Currency, depositAmount, _userToTest.Wallet.Balance), Times.Once);
         }
 
-        [Fact]
-        public void Process_ThrowsException_WhenDepositIsInvalid()
+        [Theory]
+        [InlineData(0)]
+        [InlineData(-50)]
+        [InlineData(-100)]
+        public void Process_ThrowsException_WhenDepositIsInvalid(decimal depositAmount)
         {
             // Arrange
-            var depositAmount = -50m;
             var depositProcessor = CreateServiceToTest();
             decimal initialBalance = _userToTest.Wallet.Balance;
 

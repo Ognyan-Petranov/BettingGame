@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace BettingGame.Constants
 {
     public static class RewardMultipliers

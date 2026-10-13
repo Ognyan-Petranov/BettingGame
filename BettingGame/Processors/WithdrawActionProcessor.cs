@@ -1,5 +1,4 @@
-﻿
-using BettingGame.Constants;
+﻿using BettingGame.Constants;
 using BettingGame.Domain.Entities.User;
 using BettingGame.Services.OutputWriter;
 
@@ -22,6 +21,10 @@ namespace BettingGame.Processors
             if (player.Wallet.Balance < amount)
             {
                 throw new InvalidOperationException($"Insufficient funds for withdrawal of {player.Wallet.Currency}{amount}. Your current balance is: {player.Wallet.Currency}{player.Wallet.Balance}");
+            }
+            else if (amount <= 0)
+            {
+                throw new InvalidOperationException($"Withdrawal amount must be greater than zero. You entered: {player.Wallet.Currency}{amount}");
             }
             else
             {
