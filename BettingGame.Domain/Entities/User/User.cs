@@ -23,7 +23,7 @@ namespace BettingGame.Domain.Entities.User
 
         public string LastName { get; private set; } = string.Empty;
 
-        public Wallet Wallet { get; set; } = new();
+        public Wallet Wallet { get; private set; } = new();
 
         public DateTime CreatedOn { get; private set; }
 
