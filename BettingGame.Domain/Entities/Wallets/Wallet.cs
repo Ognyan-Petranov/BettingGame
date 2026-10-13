@@ -19,11 +19,18 @@ namespace BettingGame.Domain.Entities.Wallets
 
         public void AddAmount(decimal amount)   
         {
+            if (amount <= 0)
+                throw new InvalidOperationException("Deposit amount must be greater than zero.");
             Balance += amount;
         }
 
         public void SubtractAmount(decimal amount)
         {
+            if (amount <= 0)
+                throw new InvalidOperationException("Withdrawal amount must be greater than zero.");
+            if (Balance < amount)
+                throw new InvalidOperationException($"Insufficient funds for withdrawal of {Currency}{amount}. Your current balance is: {Currency}{Balance}");
+
             Balance -= amount;
         }
     }
